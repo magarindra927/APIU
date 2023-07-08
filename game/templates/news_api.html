@@ -1,0 +1,34 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">        
+     <div class="col-md-12">
+            <h1><a href="">Family List</a></h1>
+        </div>
+        <div class="row"> 
+            {% for cfamily in familyData %}
+                <div class="col-md-3">
+                    <div class="card">
+                        {% if cfamily.urlToImage %}
+                        <img src="{{ cfamily.urlToImage.url }}" class="img-fluid card-img-top" height="50" alt="image not found">
+                        {% endif %}
+                        <div class="card-body">
+                          <h5 class="card-title"><a href="">{{ cfamily.title }}</a></h5>
+                          <p class="card-text">{{ cfamily.summary | safe }}</p>                          
+                        </div>
+                    </div>
+                </div>
+            {% empty %}   
+            <h1>No Data Found </h1>
+            {% endfor %}
+        </div>       
+    </div>   
+</div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">        
+     <div class="col-md-12">
+            <h1><a href="">Family List</a></h1>
+        </div>
+        <div class="row"> 
+            {% for cfamily in familyData %}
+                <div class="col-md-3">
+                    <div class="card">
+                        {% if cfamily.photo %}
+                        <img src="{{ cfamily.photo.url }}" class="img-fluid card-img-top" height="50" alt="image not found">
+                        {% endif %}
+                        <div class="card-body">
+                          <h5 class="card-title"><a href="">{{ cfamily.title }}</a></h5>
+                          <p class="card-text">{{ cfamily.summary | safe }}</p>
+                          <a href="{% url 'family_details' cfamily.slug %}" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}   
+            <h1>No Data Found </h1>
+            {% endfor %}
+        </div>       
+    </div>
+    <div class="row mt-5 mb-5">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if familyData.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ familyData.previous_page_number }}">Previous</a></li>
+                {% endif %}
+                {% for i in familyData.paginator.page_range %}
+                    {% if familyData.number == i %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% else %}    
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}    
+                {% endfor%}
+                {% if familyData.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ familyData.next_page_number }}">Next</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}

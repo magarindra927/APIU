@@ -1,0 +1,20 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{ popularContent.title }}</h1>
+            <p>{{ popularContent.content | safe }}</p>
+        </div>
+        <div class="col-md-4">
+            {% if popularContent.image %}
+            <img src="{{ popularContent.image.url }}" height="250" alt="No image found">
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

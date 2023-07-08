@@ -1,0 +1,35 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        {% for royal in royalData %}
+        <div class="col-md-12 mt-5">
+            <h1><a href="">{{ royal.name }}</a></h1>
+            <div class="row">
+                {% for family in royal.family_set.all %}
+                    <div class="col-md-4 mt-3">
+                        <div class="card">
+                            {% if family.photo %}
+                            <img src="{{ family.photo.url }}" class="img-fluid card-img-top" height="50" alt="image not found">
+                            {% endif %}
+                            <div class="card-body">
+                              <h5 class="card-title"><a href="">{{ family.title }}</a></h5>
+                              <p class="card-text">{{ family.summary | safe }}</p>
+                              <a href="{% url 'family_details' family.slug %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
